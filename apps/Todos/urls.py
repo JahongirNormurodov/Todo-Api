@@ -1,7 +1,10 @@
-from rest_framework.routers import DefaultRouter
-from .views import TodoViewSet
+from rest_framework_nested import routers
+from .views import TodoViewSet, SubTodoViewSet
 
-router = DefaultRouter()
-router.register('todos', TodoViewSet, basename='todos')
+router = routers.DefaultRouter()
+router.register(r"todos", TodoViewSet, basename="todo")
 
-urlpatterns = router.urls
+todos_router = routers.NestedDefaultRouter(router, r"todos", lookup="todo")
+todos_router.register(r"sub-todos", SubTodoViewSet, basename="todo-subtodos")
+
+urlpatterns = router.urls + todos_router.urls

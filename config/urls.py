@@ -20,8 +20,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('apps.Folders.urls')),
-    path('api/v1/', include('apps.Todos.urls')),
+    
     # Schema download endpoint (JSON format)
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     
@@ -30,4 +29,9 @@ urlpatterns = [
     
     # Redoc (Alternative visual interface)
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+
+    path("api/v1/", include("apps.Folders.urls")),
+    path("api/v1/", include("apps.Todos.urls")),
+    
+   
 ]
